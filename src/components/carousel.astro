@@ -1,0 +1,151 @@
+---
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChevronUp, ChevronDown } from "lucide-react";
+
+interface Event {
+  id: string | number;
+  title: string;
+  date?: string;
+  description?: string;
+  image?: string;
+}
+
+interface Props {
+  events: Event[];
+}
+
+const { events } = Astro.props as Props;
+---
+
+<div class="w-full max-w-4xl mx-auto">
+  <div class="relative h-96" id="carousel-container">
+    {events.slice(0, 3).map((event, idx) => (
+      <div
+        data-carousel-item
+        data-event-id={event.id}
+        class:list={[
+          "absolute left-0 right-0 transition-all duration-300 ease-in-out",
+          {
+            "bottom-0 z-30 h-full w-full": idx === 0,
+            "bottom-6 z-20 h-[90%] w-[95%] left-[2.5%] opacity-90": idx === 1,
+            "bottom-12 z-10 h-[80%] w-[90%] left-[5%] opacity-80": idx === 2
+          }
+        ]}
+      >
+        <Card className="w-full h-full overflow-hidden">
+          <div class="relative h-full">
+            {event.image && (
+              <div class="absolute inset-0">
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <CardContent className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 class="text-2xl font-bold mb-2">{event.title}</h3>
+              {event.date && (
+                <div class="text-sm text-gray-200 mb-2">{event.date}</div>
+              )}
+              {event.description && (
+                <p class="text-sm text-gray-200">{event.description}</p>
+              )}
+            </CardContent>
+          </div>
+        </Card>
+      </div>
+    ))}
+  </div>
+
+  <div class="flex justify-center gap-4 mt-6">
+    <Button
+      id="prev-slide"
+      variant="outline"
+      size="icon"
+      className="rounded-full"
+      aria-label="Previous event"
+    >
+      <ChevronUp className="h-6 w-6" />
+    </Button>
+    <Button
+      id="next-slide"
+      variant="outline"
+      size="icon"
+      className="rounded-full"
+      aria-label="Next event"
+    >
+      <ChevronDown className="h-6 w-6" />
+    </Button>
+  </div>
+</div>
+
+<script>
+  class EventCarousel {
+    private currentIndex: number;
+    private events: Element[];
+    private container: HTMLElement;
+    
+    constructor(container: HTMLElement) {
+      this.currentIndex = 0;
+      this.container = container;
+      this.events = Array.from(container.querySelectorAll('[data-carousel-item]'));
+      
+      // Initialize buttons
+      const prevButton = document.querySelector('#prev-slide');
+      const nextButton = document.querySelector('#next-slide');
+      
+      prevButton?.addEventListener('click', () => this.prevSlide());
+      nextButton?.addEventListener('click', () => this.nextSlide());
+      
+      // Add keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') this.prevSlide();
+        if (e.key === 'ArrowDown') this.nextSlide();
+      });
+      
+      this.updateVisibleEvents();
+    }
+    
+    private nextSlide(): void {
+      this.currentIndex = (this.currentIndex + 1) % this.events.length;
+      this.updateVisibleEvents();
+    }
+    
+    private prevSlide(): void {
+      this.currentIndex = (this.currentIndex - 1 + this.events.length) % this.events.length;
+      this.updateVisibleEvents();
+    }
+    
+    private updateVisibleEvents(): void {
+      const baseClasses = "absolute left-0 right-0 transition-all duration-300 ease-in-out";
+      
+      this.events.forEach((event, i) => {
+        const position = (i - this.currentIndex + this.events.length) % this.events.length;
+        
+        if (position < 3) {
+          event.classList.remove('hidden');
+          if (position === 0) {
+            event.className = `${baseClasses} bottom-0 z-30 h-full w-full`;
+          } else if (position === 1) {
+            event.className = `${baseClasses} bottom-6 z-20 h-[90%] w-[95%] left-[2.5%] opacity-90`;
+          } else {
+            event.className = `${baseClasses} bottom-12 z-10 h-[80%] w-[90%] left-[5%] opacity-80`;
+          }
+        } else {
+          event.classList.add('hidden');
+        }
+      });
+    }
+  }
+
+  // Initialize carousel when the DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('#carousel-container');
+    if (container) {
+      new EventCarousel(container as HTMLElement);
+    }
+  });
+</script>
