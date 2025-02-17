@@ -3,12 +3,35 @@ import Layout from "../layouts/root-layout.astro";
 import "@/styles/global.css";
 import Section from "@/sections/section.astro";
 import { cn } from "@/lib/utils";
-import { StackedEventCarousel } from "@/components/carousel";
+import StackedEventCarousel from "@/components/carousel.astro";
 import Events from "@/sections/events.astro";
 import { Image } from "astro:assets";
 import eceHod from "@/assets/ecehod.jpg";
+
 const normalAlignment = "col-start-3 col-end-[14]";
 const fullBleed = "col-start-1 col-end-[-1]";
+
+// Your event data
+const events = [
+  {
+    id: 1,
+    title: "Tech Fest 2024",
+    description: "Annual technical festival of ECE department featuring innovative projects, workshops, and competitions.",
+    image: "/api/placeholder/800/400"
+  },
+  {
+    id: 2,
+    title: "Workshop on VLSI Design",
+    description: "Hands-on workshop on VLSI design principles led by industry experts from Intel.",
+    image: "/api/placeholder/800/400"
+  },
+  {
+    id: 3,
+    title: "Industry Expert Talk",
+    description: "Guest lecture on emerging trends in Electronics by Dr. Sarah Johnson from Silicon Labs.",
+    image: "/api/placeholder/800/400"
+  }
+];
 ---
 
 <script>
@@ -41,7 +64,7 @@ const fullBleed = "col-start-1 col-end-[-1]";
         Department of Electronics and Communication Engineering offering B.Tech
         in Electronics and Communication Engineering. Later the programme has
         been affiliated to APJ Abdul Kalam Technological University since its
-        inception from 2015 onwards. B.Tech programme is accredited by NBA.
+        inception from 2015 onwards. B.Tech programme is accredited by NBA.
       </p>
     </Section>
     <Section
@@ -50,7 +73,6 @@ const fullBleed = "col-start-1 col-end-[-1]";
     >
       <div class="flex gap-4 flex-col md:flex-row">
         <div class="md:flex-shrink-0">
-          <!-- <div class="w-full md:w-[450px] h-[250px] bg-gray-400"></div> -->
           <Image
             src={eceHod}
             alt="ece hod"
@@ -87,7 +109,7 @@ const fullBleed = "col-start-1 col-end-[-1]";
     </Section>
     <Section wrapperClass={cn(normalAlignment, "")} title="News">
       <div class="pt-12">
-        <StackedEventCarousel client:load />
+        <StackedEventCarousel events={events} client:load />
       </div>
     </Section>
     <Section wrapperClass={cn(normalAlignment, "")} title="Events">
