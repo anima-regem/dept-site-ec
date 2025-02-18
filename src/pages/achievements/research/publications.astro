@@ -1,12 +1,19 @@
 ---
-
 import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
-
+import JournalPaper from '../../../components/textModel.astro';
+import ButtonLayout from '../../../components/buttonLayout.astro';
 ---
 
 <PageLayout
   title="Faculty of Department of Electronics and Communication Engineering | GEC PKD"
 >
+<ButtonLayout currentTab="publications" />
 
+  <JournalPaper
+    title="Another Research Paper Title"
+    description="Author Name, Journal Name, vol. X, pp. Y-Z, Year."
+    date="2022-2023"
+    place="Another Place"
+  />
 </PageLayout>

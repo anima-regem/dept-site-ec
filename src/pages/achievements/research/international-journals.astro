@@ -1,0 +1,36 @@
+---
+import "@/styles/global.css";
+import PageLayout from "@/layouts/page-layout.astro";
+import JournalPaper from '../../../components/textModel.astro';
+
+import ButtonLayout from '../../../components/buttonLayout.astro';
+---
+
+<PageLayout title="International Journals | GEC PKD">
+  <ButtonLayout currentTab="international-journals" />
+
+  <h1>International Journals</h1>
+  <p>This page lists all international journal publications.</p>
+
+  <!-- Journal Entries -->
+  <JournalPaper
+    title="Advanced Communication Systems"
+    description="John Doe, IEEE Communications Magazine, vol. 12, pp. 45-50, 2023."
+    date="2023"
+    place="New York, USA"
+  />
+
+  <JournalPaper
+    title="Machine Learning in Wireless Networks"
+    description="Jane Smith, Springer Wireless Networks, vol. 8, pp. 23-30, 2022."
+    date="2022"
+    place="Berlin, Germany"
+  />
+
+  <JournalPaper
+    title="5G Network Optimization"
+    description="Alice Johnson, Elsevier Computer Networks, vol. 15, pp. 10-20, 2021."
+    date="2021"
+    place="London, UK"
+  />
+</PageLayout>

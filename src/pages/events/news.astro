@@ -78,6 +78,18 @@ const newsItems = [
 ];
 
 const sortedNews = newsItems.sort((a, b) => new Date(b.displayDate) - new Date(a.displayDate));
+
+// Group news items into three columns while maintaining chronological order
+const distributeNewsToColumns = (news) => {
+  const columns = [[], [], []];
+  news.forEach((item, index) => {
+    const columnIndex = index % 3;
+    columns[columnIndex].push(item);
+  });
+  return columns;
+};
+
+const newsColumns = distributeNewsToColumns(sortedNews);
 ---
 
 <PageLayout title="Faculty of Department of Electronics and Communication Engineering | GEC PKD">
@@ -85,39 +97,43 @@ const sortedNews = newsItems.sort((a, b) => new Date(b.displayDate) - new Date(a
     <h1 class="text-3xl font-bold mb-8">News</h1>
 
     <!-- Masonry Grid -->
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-      {sortedNews.map((news) => (
-        <div class="break-inside-avoid">
-          <article class={`
-            bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md 
-            transition-all duration-200 mb-6
-            ${news.size === 'large' ? 'h-[400px]' : 
-              news.size === 'medium' ? 'h-[300px]' : 
-              'h-[250px]'}
-          `}>
-            {news.image && (
-              <div class="relative w-full h-2/3 overflow-hidden">
-                <img
-                  src={news.image}
-                  alt={news.title}
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div class="p-4 h-1/3 flex flex-col justify-between">
-              <div>
-                <div class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-md text-sm font-medium mb-3">
-                  {news.displayDate}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {newsColumns.map((column, columnIndex) => (
+        <div class="flex flex-col gap-6">
+          {column.map((news) => (
+            <article class={`
+              bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md 
+              transition-all duration-200
+              ${news.size === 'large' ? 'min-h-[400px]' : 
+                news.size === 'medium' ? 'min-h-[300px]' : 
+                'min-h-[250px]'}
+              ${columnIndex === 1 ? 'lg:mt-12' : 
+                columnIndex === 2 ? 'lg:mt-24' : ''}
+            `}>
+              {news.image && (
+                <div class="relative w-full h-48 overflow-hidden">
+                  <img
+                    src={news.image}
+                    alt={news.title}
+                    class="w-full h-full object-cover"
+                  />
                 </div>
-                <h2 class="text-lg font-semibold mb-3 line-clamp-2">
-                  {news.title}
-                </h2>
+              )}
+              <div class="p-4 flex flex-col justify-between">
+                <div>
+                  <div class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-md text-sm font-medium mb-3">
+                    {news.displayDate}
+                  </div>
+                  <h2 class="text-lg font-semibold mb-3 line-clamp-2">
+                    {news.title}
+                  </h2>
+                </div>
+                <p class="text-gray-600 text-sm line-clamp-2">
+                  {news.description}
+                </p>
               </div>
-              <p class="text-gray-600 text-sm line-clamp-2">
-                {news.description}
-              </p>
-            </div>
-          </article>
+            </article>
+          ))}
         </div>
       ))}
     </div>

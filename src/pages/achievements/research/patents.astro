@@ -1,12 +1,34 @@
 ---
-
-import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
-
+import JournalPaper from '../../../components/textModel.astro';
+import "@/styles/global.css";
+import ButtonLayout from '../../../components/buttonLayout.astro';
 ---
 
-<PageLayout
-  title="Faculty of Department of Electronics and Communication Engineering | GEC PKD"
->
+<PageLayout title="Patents | GEC PKD">
+  <ButtonLayout currentTab="patents" />
 
+  <h1>Patents</h1>
+  <p>This page lists all patents.</p>
+
+  <!-- Patent Entries -->
+  <JournalPaper
+    title="Patent on Wireless Sensor Networks"
+    description="Patent No. US1234567, Granted in 2023."
+    date="2023"
+    place="United States Patent Office"
+  />
+
+  <JournalPaper
+    title="Patent on AI-Based Signal Processing"
+    description="Patent No. IN987654, Granted in 2022."
+    date="2022"
+    place="Indian Patent Office"
+  />
+
+  <JournalPaper
+    title="Patent on Energy-Efficient Communication Protocols"
+    description="Patent No. EU456789, Granted in 2021."
+    
+  />
 </PageLayout>
