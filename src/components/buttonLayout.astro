@@ -1,0 +1,58 @@
+---
+// ButtonLayout.astro
+interface Tab {
+  id: string;
+  label: string;
+  href: string;
+  color: string;
+  hoverColor: string;
+}
+
+interface Props {
+  currentTab?: string;
+}
+
+const { currentTab = 'publications' } = Astro.props;
+
+const tabs: Tab[] = [
+  {
+    id: 'publications',
+    label: 'Publications',
+    href: '/achievements/research/publications',
+    color: 'bg-blue-500',
+    hoverColor: 'hover:bg-blue-600'
+  },
+  {
+    id: 'international-journals',
+    label: 'International Journals',
+    href: '/achievements/research/international-journals',
+    color: 'bg-purple-500',
+    hoverColor: 'hover:bg-purple-600'
+  },
+  {
+    id: 'patents',
+    label: 'Patents',
+    href: '/achievements/research/patents',
+    color: 'bg-green-500',
+    hoverColor: 'hover:bg-green-600'
+  }
+];
+---
+
+<div class="flex gap-2.5 mb-5">
+  {tabs.map(tab => (
+    <a
+      href={tab.href}
+      class:list={[
+        'no-underline px-4 py-1.5 text-white text-sm',
+        'transition-all duration-200',
+        'rounded-md transform skew-x-[-12deg]',
+        tab.color,
+        tab.hoverColor,
+        tab.id === currentTab ? 'shadow-md' : 'opacity-30 hover:opacity-70'
+      ]}
+    >
+      <span class="block transform skew-x-[12deg]">{tab.label}</span>
+    </a>
+  ))}
+</div>

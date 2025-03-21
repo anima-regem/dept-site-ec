@@ -1,12 +1,86 @@
 ---
-
 import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
+// Import the existing carousel component
+import EventCarousel from "@/components/carousel.astro";
+// Import the new project gallery component
+import ProjectGallery from "@/components/project-gallery";
 
+// Project items to display in the carousel
+const projectItems = [
+  {
+    id: 1,
+    displayDate: "2024-02-28",
+    title: "Aparna V Shenoy of S3 ECE was selected for Interzone Volleyball Team",
+    description: "Congratulations to Aparna V Shenoy for her outstanding achievement in being selected for the Interzone Volleyball Team.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg",
+  },
+  {
+    id: 2,
+    displayDate: "2024-02-18",
+    title: "Congratulations to the S6 Toppers",
+    description: "We proudly announce our S6 toppers who have demonstrated exceptional academic performance.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg",
+  },
+  {
+    id: 3,
+    displayDate: "2024-02-08",
+    title: "Ideas Competition Winners",
+    description: "Celebrating the innovative spirit of our students in the annual Ideas Competition.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
+  },
+  {
+    id: 4,
+    displayDate: "2024-01-25",
+    title: "New Research Lab Inaugurated",
+    description: "State-of-the-art electronics research facility now available for students and faculty.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg",
+  },
+  {
+    id: 5,
+    displayDate: "2024-01-15",
+    title: "Faculty Development Program",
+    description: "Our department hosted a week-long development program for electronics professors.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg",
+  }
+];
+
+// Format the project items in the format expected by the EventCarousel component
+const carouselEvents = projectItems.map(item => ({
+  id: item.id,
+  title: item.title,
+  date: item.displayDate,
+  description: item.description,
+  image: item.image
+}));
 ---
 
-<PageLayout
-  title="Faculty of Department of Electronics and Communication Engineering | GEC PKD"
->
+<PageLayout title="Projects | Department of Electronics and Communication Engineering | GEC PKD">
+  <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl font-bold mb-4 text-gray-900">Featured Projects</h1>
+      <div class="w-24 h-1 bg-indigo-600 mx-auto mb-6"></div>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Explore innovative projects and research work from the Department of Electronics and Communication Engineering
+      </p>
+    </div>
 
+    <!-- Carousel Component -->
+    <EventCarousel events={carouselEvents} />
+
+    <!-- Project Gallery Component -->
+    <div class="mt-16">
+      <div class="mb-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-gray-900">Project Gallery</h2>
+        <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Browse through our project archives by year
+        </p>
+      </div>
+      
+      <ProjectGallery client:load />
+    </div>
+   
+  </main>
 </PageLayout>
