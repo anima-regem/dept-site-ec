@@ -1,6 +1,74 @@
 // File: src/components/project-gallery.tsx
 import { useState } from 'react';
-import projectsData from '@/data/projects.json';
+
+// Manual project data definition with Flowbite images
+const projectsData = {
+  years: [
+    {
+      year: "2023",
+      images: [
+        {
+          name: "Project 1",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
+        },
+        {
+          name: "Project 2",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
+        },
+        {
+          name: "Project 3",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
+        },
+        {
+          name: "Project 4",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
+        },
+        {
+          name: "Project 5",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
+        }
+      ]
+    },
+    {
+      year: "2022",
+      images: [
+        {
+          name: "Project 6",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
+        },
+        {
+          name: "Project 7",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
+        },
+        {
+          name: "Project 8",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
+        },
+        {
+          name: "Project 9",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
+        }
+      ]
+    },
+    {
+      year: "2021",
+      images: [
+        {
+          name: "Project 10",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
+        },
+        {
+          name: "Project 11",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
+        },
+        {
+          name: "Project 1",
+          fullName: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
+        }
+      ]
+    }
+  ]
+};
 
 const ProjectGallery = () => {
     const currentYear = new Date().getFullYear();
@@ -31,10 +99,6 @@ const ProjectGallery = () => {
         return <div>No projects found</div>;
     }
 
-    // Log the current state to debug
-    console.log("Selected Year:", selectedYear);
-    console.log("Year Projects:", yearProjects);
-
     return (
         <div className="space-y-6">
             <div className="flex justify-end px-4">
@@ -58,7 +122,7 @@ const ProjectGallery = () => {
                         className="bg-white rounded-lg shadow-md overflow-hidden"
                     >
                         <img
-                            src={`/placements/${yearProjects.year}/${image.fullName}`}
+                            src={image.fullName}
                             alt={image.name}
                             className="w-full h-64 object-cover rounded-lg"
                             loading="lazy"
