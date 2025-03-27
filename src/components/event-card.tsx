@@ -5,7 +5,7 @@ const events = [
     id: 1,
     title: "Laser Tag",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem a nobis earum. Possimus corrupti nostrum maxime inventore id earum voluptatem quo culpa ducimus, unde sit, impedit iste temporibus asperiores neque.",
-    imageURL: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGd5bXxlbnwwfHwwfHx8MA%3D%3D",
+    imageURL: "../src/assets/events/association inaguration.jpg",
     date: new Date(2024, 4, 15) // May 15, 2024
   },
   {
