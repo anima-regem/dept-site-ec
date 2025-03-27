@@ -2,12 +2,63 @@
 import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
 import Eventcard from "@/components/event-card";
+import EventCarousel from "@/components/carousel.astro";
+
+const eventItems = [
+  {
+    id: 1,
+    displayDate: "2024-02-28",
+    title: "Aparna V Shenoy of S3 ECE was selected for Interzone Volleyball Team",
+    description: "Congratulations to Aparna V Shenoy for her outstanding achievement in being selected for the Interzone Volleyball Team.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg",
+  },
+  {
+    id: 2,
+    displayDate: "2024-02-18",
+    title: "Congratulations to the S6 Toppers",
+    description: "We proudly announce our S6 toppers who have demonstrated exceptional academic performance.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg",
+  },
+  {
+    id: 3,
+    displayDate: "2024-02-08",
+    title: "Ideas Competition Winners",
+    description: "Celebrating the innovative spirit of our students in the annual Ideas Competition.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
+  },
+  {
+    id: 4,
+    displayDate: "2024-01-25",
+    title: "New Research Lab Inaugurated",
+    description: "State-of-the-art electronics research facility now available for students and faculty.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg",
+  },
+  {
+    id: 5,
+    displayDate: "2024-01-15",
+    title: "Faculty Development Program",
+    description: "Our department hosted a week-long development program for electronics professors.",
+    image: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg",
+  }
+];
+
+// Format the project items in the format expected by the EventCarousel component
+const carouselEvents = eventItems.map(item => ({
+  id: item.id,
+  title: item.title,
+  date: item.displayDate,
+  description: item.description,
+  image: item.image
+}));
+
 ---
+
 
 <PageLayout
   title="Faculty of Department of Electronics and Communication Engineering | GEC PKD"
 >
   <div class="px-10">
+    <EventCarousel events={carouselEvents} />
     <Eventcard />
   </div>
 </PageLayout>

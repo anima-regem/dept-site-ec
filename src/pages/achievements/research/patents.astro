@@ -3,32 +3,36 @@ import PageLayout from "@/layouts/page-layout.astro";
 import JournalPaper from '../../../components/textModel.astro';
 import "@/styles/global.css";
 import ButtonLayout from '../../../components/buttonLayout.astro';
+
+// Patent data
+const patentsData = [
+    {
+        "category": "Patent",
+        "date": "08/01/2019",
+        "title": "Method and System for Consonant-Vowel Ratio modification for improving speech perception",
+        "institution": "In this college",
+        "academic_year": "2018-2019"
+    }
+];
 ---
 
 <PageLayout title="Patents | GEC PKD">
   <ButtonLayout currentTab="patents" />
 
-  <h1>Patents</h1>
-  <p>This page lists all patents.</p>
+  <h1 class="text-2xl font-bold mb-4">Patents</h1>
+  <p class="mb-6">This page lists all patents.</p>
 
-  <!-- Patent Entries -->
-  <JournalPaper
-    title="Patent on Wireless Sensor Networks"
-    description="Patent No. US1234567, Granted in 2023."
-    date="2023"
-    place="United States Patent Office"
-  />
+  <!-- Dynamic Patent Entries -->
+  {patentsData.map(patent => (
+    <JournalPaper
+      title={patent.title}
+      description={`${patent.academic_year}, ${patent.institution}`}
+      date={patent.date}
+      place={patent.institution}
+    />
+  ))}
 
-  <JournalPaper
-    title="Patent on AI-Based Signal Processing"
-    description="Patent No. IN987654, Granted in 2022."
-    date="2022"
-    place="Indian Patent Office"
-  />
-
-  <JournalPaper
-    title="Patent on Energy-Efficient Communication Protocols"
-    description="Patent No. EU456789, Granted in 2021."
-    
-  />
+  {patentsData.length === 0 && (
+    <p class="text-gray-600">No patents found.</p>
+  )}
 </PageLayout>

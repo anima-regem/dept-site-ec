@@ -53,115 +53,90 @@ export const faculty: Faculty[] = sortFaculty([
   {
     name: "Mr. VIPIL K",
     designation: "Assistant Professor (Contract)",
-    image: "",
+    image: "/src/assets/faculty photos/VIPIL K.jpg",
     email: "dmlwaWxrQGdlY3NrcC5hYy5pbg==",
   },
   {
     name: "SOUMYA C P",
     designation: "Assistant Professor (Contract)",
-    image: "",
+    image: "/src/assets/faculty photos/SOUMYA C P.jpg",
     email: "c291bXlhY3BAZ2Vjc2twLmFjLmlu",
   },
   {
     name: "Prof. ANWAR HUSSAIN M.",
     designation: "Associate Professor",
-    image: "",
+    image: "/src/assets/faculty photos/ANWAR HUSSAIN M..webp",
     email: "YW53YXJodXNzYWlubUBnZWNza3AuYWMuaW4=",
   },
   {
     name: "Dr. BINDU P(PALAKKAL)",
     designation: "Associate Professor",
-    image: "",
+    image: "/src/assets/faculty photos/BINDU P( PALAKKAL).jpg",
     email: "YmluZHVwQGdlY3NrcC5hYy5pbg==",
   },
-  {
-    name: "Prof. SHAMLA B",
-    designation: "Assistant Professor",
-    image: "",
-    email: "c2hhbWxhc2FmaW5AeWFob28uY29t",
-  },
+  
   {
     name: "Prof. RANI L",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/RANI L.jpg",
     email: "cmFuaWxAZ2Vjc2twLmFjLmlu",
   },
   {
     name: "Prof. HARIPRASAD B",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/HARIPRASAD.B.jpg",
     email: "aHBtYWxhYmFyQGdtYWlsLmNvbQ==",
   },
-  {
-    name: "Prof. VISHNUPRASAD K",
-    designation: "Assistant Professor",
-    image: "",
-    email: "dmlzaG51cHJhc2FkQGdlY3NrcC5hYy5pbg==",
-  },
+
   {
     name: "Prof. LINCY K",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/LINCY K.jpg",
     email: "bGluY3lrNDVAZ21haWwuY29t",
   },
-  {
-    name: "Prof. DR. ANITHA R",
-    designation: "Assistant Professor",
-    image: "",
-    email: "cmFuaXRoYUBnZWNza3AuYWMuaW4=",
-  },
-  {
-    name: "Dr. R JAYADEVAN",
-    designation: "Assistant Professor",
-    image: "",
-    email: "cmpheWFkZXZhbkBnZWNza3AuYWMuaW4=",
-  },
+ 
+  
   {
     name: "Prof. GAYATHRI A",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/GAYATHRI A.jpg",
     email: "Z2F5YXRocmkuYTI3OTFAZ21haWwuY29t",
   },
   {
     name: "Prof. DR. SHEELA V K",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/DR. SHEELA V K.jpg",
     email: "c2hlZWxhdmtAZ2Vjc2twLmFjLmlu",
   },
   {
     name: "NIRMAL M R",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/NIRMAL M R.jpg",
     email: "bmxybWFsYW1iYWQ2QGdtYWlsLmNvbQ==",
   },
-  {
-    name: "DILEEP M",
-    designation: "Assistant Professor",
-    image: "",
-    email: "ZGlsZWVwbWFkaGF2YW5AZ2Vjc2twLmFjLmlu",
-  },
+  
   {
     name: "JITHESH C P",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/JITHESH C P.jpg",
     email: "aml0aHU4MEBnbWFpbC5jb20=",
   },
   {
     name: "Dr. CHITHIRA P. R.",
     designation: "Assistant Professor",
-    image: "",
+    image: "/src/assets/faculty photos/CHITHIRA P. R..jpg",
     email: "Y2hpdGhpcmFwckBnbWFpbC5jb20=",
   },
   {
     name: "Mrs. GARGI S",
     designation: "Assistant Professor (Contract)",
-    image: "",
+    image: "/src/assets/faculty photos/GARGI.S.jpg",
     email: "Z2FyZ2lzcmVlNDVAZ21haWwuY29t",
   },
   {
     name: "Mrs. NIRMALA K V",
     designation: "Instructor Gr.I",
-    image: "",
+    image: "/src/assets/faculty photos/NIRMALA K V.jpg",
     email: "bmxybWFsYTIwMTdzQGdtYWlsLmNvbQ==",
   },
 ]);
@@ -170,73 +145,28 @@ export const staff: Staff[] = sortStaff([
   {
     name: "MUHAMMAD ALI M",
     designation: "Instructor Gr.II",
-    image: "",
+    image: "/src/assets/staffs/MUHAMMAD ALI M.jpg",
     email: "YWxpYXNtbTA3N0BnbWFpbC5jb20=",
   },
-  {
-    name: "MR. SATHYANATH VARIATH",
-    designation: "Computer Programmer",
-    image: "",
-    email: "c2F0aHlhbi5lY0BnbWFpbC5jb20=",
-  },
+ 
   {
     name: "SURESHBABU P",
     designation: "Trade Instructor Gr.II",
-    image: "",
+    image: "/src/assets/staffs/SURESHBABU P.jpg",
     email: "c3VyZXNoYmFidW1nbUBnbWFpbC5jb20=",
   },
-  {
-    name: "SARJA K K",
-    designation: "Trade Instructor Gr.II",
-    image: "",
-    email: "c2FyamFuYXphckBnbWFpbC5jb20=",
-  },
+
   {
     name: "MANOJ K P",
     designation: "Trade Instructor Gr.I",
-    image: "",
+    image: "/src/assets/staffs/MANOJ K P.jpg",
     email: "RW1haWwgVW5hdmFpbGFibGU=", // Email Unavailable
   },
   {
     name: "MR. MAHESH C",
     designation: "Tradesman",
-    image: "",
+    image: "/src/assets/staffs/MR. MAHESH C.jpg",
     email: "RW1haWwgVW5hdmFpbGFibGU=", // Email Unavailable
   },
-  {
-    name: "SAJITHA C",
-    designation: "Tradesman",
-    image: "",
-    email: "RW1haWwgVW5hdmFpbGFibGU=", // Email Unavailable
-  },
-  {
-    name: "SUJA M R",
-    designation: "Tradesman",
-    image: "",
-    email: "RW1haWwgVW5hdmFpbGFibGU=", // Email Unavailable
-  },
-  {
-    name: "RADHAKRISHNAN K",
-    designation: "Tradesman",
-    image: "",
-    email: "cmFkaGFrcmlzaG5hbjE5ODdAZ21haWwuY29t",
-  },
-  {
-    name: "SIVAHARI P K",
-    designation: "Tradesman",
-    image: "",
-    email: "c2l2YWhhcmlwa0BnbWFpbC5jb20=",
-  },
-  {
-    name: "SESHADRI A S",
-    designation: "Trade Instructor Gr.II",
-    image: "",
-    email: "c2VzaGFkcmlwYWxha2thZEBnbWFpbC5jb20=",
-  },
-  {
-    name: "ASKARALI C",
-    designation: "Trade Instructor Gr.II",
-    image: "",
-    email: "YXNrYXJwb2x5QGdtYWlsLmNvbQ==",
-  },
+  
 ]);
