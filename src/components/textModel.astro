@@ -1,6 +1,4 @@
 ---
-// src/components/JournalPaper.astro
-
 const { title, description, date, place } = Astro.props;
 ---
 
@@ -15,7 +13,7 @@ const { title, description, date, place } = Astro.props;
   
   {place && (
     <div class="absolute right-5 bottom-5 bg-white p-3 rounded-lg shadow">
-      <p class="text-center">In this college<br />{place}</p>
+      <p class="text-center">{place}</p>
     </div>
   )}
 </div>

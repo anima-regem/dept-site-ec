@@ -7,6 +7,7 @@ import StackedEventCarousel from "@/components/carousel.astro";
 import Events from "@/sections/events.astro";
 import { Image } from "astro:assets";
 import eceHod from "@/assets/ecehod.jpg";
+import ecdpt from "@/assets/ec-dpt.jpg";
 
 const normalAlignment = "col-start-3 col-end-[14]";
 const fullBleed = "col-start-1 col-end-[-1]";
@@ -56,7 +57,13 @@ const events = [
 >
   <div class="bg-white min-h-screen pt-5 grid g-t space-y-8 py-2">
     <!-- <Header /> -->
-    <div class="h-[400px] w-full bg-gray-300 col-start-1 col-end-[-1]"></div>
+    <div class="h-[400px] w-full bg-gray-300 col-start-1 col-end-[-1]">
+      <Image
+      src={ecdpt}
+      alt="dpt front"
+      class="h-full md: bg-gray-400 rounded-md"
+      />
+    </div>
     <Section title="About the Department" wrapperClass={normalAlignment}>
       <p
         class="leading-7 [&:not(:first-child)]:mt-6 font-medium text-pretty max-w-screen-lg text-lg"

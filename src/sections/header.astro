@@ -28,9 +28,8 @@ const navItems = [
     name: "ACHIEVEMENT",
     href: "/achievements",
     sub: [
-      { name: "Projects", href: "/projects" },
       { name: "Research", href: "/research/publications" },
-      { name: "Achivements", href: "/alumini" },
+      { name: "Achievemets", href: "/achievements" },
     ],
   },
   {
@@ -46,12 +45,12 @@ const navItems = [
 ];
 ---
 
-<header class="flex flex-col px-4 col-start-2 col-end-[14] h-fit py-2">
+<header class="flex flex-col px-4 col-start-2 col-end-[14] h-fit py-2 bg-white z-50 relative">
   <LogoWithText />
   <div class="my-2">
     <Separator client:visible />
   </div>
-  <nav class="">
+  <nav class="w-full">
     <div class="mx-auto px-4">
       <div class="flex items-center justify-between">
         <div class="hidden md:flex space-x-4 justify-between w-full">
@@ -72,7 +71,7 @@ const navItems = [
                 )}
 
                 {item.sub && (
-                  <div class="absolute left-0 py-2 top-full hidden w-48 bg-white shadow-lg group-hover:block">
+                  <div class="absolute left-0 py-2 top-full hidden w-48 bg-white shadow-lg group-hover:block z-50">
                     <div class="flex flex-col space-y-2">
                       {item.sub.map((subItem) => (
                         <a
@@ -97,3 +96,15 @@ const navItems = [
     </div>
   </nav>
 </header>
+
+<style>
+  /* Ensure header is rendered at the top of the layout */
+  :global(body) {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  :global(header) {
+    order: -1;
+  }
+</style>

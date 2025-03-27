@@ -2,35 +2,147 @@
 import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
 import JournalPaper from '../../../components/textModel.astro';
-
 import ButtonLayout from '../../../components/buttonLayout.astro';
----
 
+// Filter and process journal publications
+const journalPublications = [
+{
+    "category": "International Journal papers with impact factor",
+    "date": "04/10/2014",
+    "authors": ["A. R. Jayan", "P. C. Pandey"],
+    "title": "Automated modification of consonant-vowel ratio of stops for improving speech intelligibility",
+    "journal": "Int. J. Speech Technol.",
+    "institution": "In this college",
+    "academic_year": "2014-2015"
+},
+  {
+    "category": "International Conferences",
+    "date": "19/04/2019",
+    "authors": ["A. R. Jayan and P. C. Pandey"],
+    "journal": "Int. J. Speech Technol.",
+    "title": "Detection of stop landmarks using Gaussian mixture modeling of speech spectrum",
+    "institution": "Outside this college",
+    "academic_year": "2008-2009" 
+  },
+  {
+    "category": "International Conferences",
+    "date": "02/09/2019",
+    "authors": ["A. R. Jayan and P. C. Pandey"],
+    "journal": "Int. J. Speech Technol.",
+    "title": "Detection of stop landmarks using Gaussian mixture modeling of speech spectrum",
+    "institution": "Outside this college",
+    "academic_year": "2008-2009" 
+  },
+  {
+    "category": "International Conferences",
+    "date": "19/04/2019",
+    "authors": ["A. R. Jayan, P. C. Pandey, and P. K. Lehana"],
+    "journal": "Proc. 19th Int. Congress Acoustics 2007",
+    "title": "Time-scaling of consonant-vowel transitions using harmonic-plus-noise model for improving speech perception by listeners with moderate sensorineural impairment",
+    "institution": "In this college",
+    "academic_year": "2006-2007" 
+  },
+  {
+    "category": "International Conferences",
+    "date": "20/02/2008",
+    "authors": ["A. R. Jayan and P. C. Pandey"],
+    "journal": " Proc. Int. Symposium on Frontiers of Research on Speech and Music 2008.",
+    "title": "Automated detection of speech landmarks using Gaussian mixture modeling",
+    "institution": "In this college",
+    "academic_year": "2007-2008" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "05/01/2019",
+    "authors": ["A. R. Jayan, P. C. Pandey, and P. K. Lehana"],
+    "journal": " Proc. IEEE Int. Conf. Signal Processing, Communications, Networking 2008",
+    "title": " Automated detection of transition segments for intensity and time-Scale modification for speech intelligibility enhancement",
+    "institution": "In this college",
+    "academic_year": "2007-2008" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "21/02/2014",
+    "authors": ["Devis Thomas, and Jayan, A.R"],
+    "journal": "Proc. IACCC 2014, Gurgaon, India.",
+    "title": "Automated Suppression of Howling Noise Using Sinusoidal Model Based Analysis/Synthesis",
+    "institution": "In this college",
+    "academic_year": "2013-2014" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "08/09/2014",
+    "authors": ["Rohit, P., and Jayan, A.R."],
+    "journal": " Proc. ICSSP 2014, Kollam, India.",
+    "title": "Speech Enhancement by Time-Scale Expansion and Emphasis of Low Energy Segments",
+    "institution": "Outside this college",
+    "academic_year": "2013-2014" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "04/04/2017",
+    
+    "title": "Effect of CVR modification on automatic recognition of stop consonants in isolated VCV utterances by an HMM based ASR system",
+    "institution": "Outside this college",
+    "academic_year": "2016-2017" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "01/09/2016",
+    "title": "Speech intelligibility enhancement on android platform by consonant-vowel-ratio modification",
+    "institution": "Outside this college",
+    "academic_year": "2015-2016" 
+  }
+  ,
+  {
+    "category": "International Conferences",
+    "date": "19/11/2015",
+    
+    "title": "An offline signal processing technique for accurate localisation of stop release bursts in vowel-consonant-vowel utterances",
+    "institution": "Outside this college",
+    "academic_year": "2015-2016" 
+  } ,{
+    "category": "International Conferences",
+    "date": "19/11/2015",
+    
+    "title": "Segment specific enhancement of speech characteristics for improving speech intelligibility under adverse listening conditions",
+    "institution": "Outside this college",
+    "academic_year": "2015-2016" 
+  },
+  {
+    "category": "International Conferences",
+    "authors": ["George Abraham, Prigish & M S, Sinith & R. Jayan, A."],
+    "journal": "10th International Conference, IHCI 2018,",
+    "title": "Cumulative Impulse Strength Based Epoch Extraction from Singing Voice",
+
+  }
+];---
+
+const journalPublications = publicationsData.map(pub => pub);
+---
+// Paste the entire d
 <PageLayout title="International Journals | GEC PKD">
   <ButtonLayout currentTab="international-journals" />
 
-  <h1>International Journals</h1>
-  <p>This page lists all international journal publications.</p>
+  <h1 class="text-2xl font-bold mb-4">International Journals</h1>
+  <p class="mb-6">This page lists all international journal publications.</p>
 
   <!-- Journal Entries -->
-  <JournalPaper
-    title="Advanced Communication Systems"
-    description="John Doe, IEEE Communications Magazine, vol. 12, pp. 45-50, 2023."
-    date="2023"
-    place="New York, USA"
-  />
+  {journalPublications.map(pub => (
+    <JournalPaper 
+      title={pub.title}
+      description={`${pub.authors ? pub.authors.join(', ') : 'Unknown Authors'}, ${pub.journal || 'N/A'}, ${pub.academic_year || 'N/A'}`}
+      date={pub.date || 'N/A'}
+      place={pub.institution || 'N/A'}
+    />
+  ))}
 
-  <JournalPaper
-    title="Machine Learning in Wireless Networks"
-    description="Jane Smith, Springer Wireless Networks, vol. 8, pp. 23-30, 2022."
-    date="2022"
-    place="Berlin, Germany"
-  />
-
-  <JournalPaper
-    title="5G Network Optimization"
-    description="Alice Johnson, Elsevier Computer Networks, vol. 15, pp. 10-20, 2021."
-    date="2021"
-    place="London, UK"
-  />
+  {journalPublications.length === 0 && (
+    <p class="text-gray-600">No journal publications found.</p>
+  )}
 </PageLayout>

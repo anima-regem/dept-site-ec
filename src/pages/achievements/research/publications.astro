@@ -3,17 +3,47 @@ import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
 import JournalPaper from '../../../components/textModel.astro';
 import ButtonLayout from '../../../components/buttonLayout.astro';
+
+const publications = [
+    {
+        "category": "National Journal papers with impact factor",
+        "date": "03/02/2019",
+        "authors": ["A. R. Jayan", "P. C. Pandey"],
+        "title": "Automated CVR modification for improving perception of stop consonants",
+        "journal": "Proc. National Conference on Communications 2012 (NCC 2012)",
+        "institution": "In this college",
+        "academic_year": "2011-2012"
+    },
+    {
+        "category": "National Journal papers with impact factor",
+        "date": "03/02/2012",
+        "authors": ["A. R. Jayan, P. S. Rajath Bhat, and P. C. Pandey"],
+        "title": "Detection of burst onset landmarks in speech using rate of change of spectral moments",
+        "journal": "Proc. National Conference on Communications 2011",
+        "institution": "In this college",
+        "academic_year": "2010-2011"
+    },
+    {
+        "category": "National Journal papers with impact factor",
+        "date": "21/02/2014",
+        "authors": ["Rohit, P., and Jayan, A.R"],
+        "title": "Speech Enhancement using Sinusoidal Model Based Analysis/Synthesis",
+        "journal": "Proc. NATCON 2014 ",
+        "institution": "Outside this college",
+        "academic_year": "2013-2014"
+    }
+];
 ---
 
-<PageLayout
-  title="Faculty of Department of Electronics and Communication Engineering | GEC PKD"
->
-<ButtonLayout currentTab="publications" />
-
-  <JournalPaper
-    title="Another Research Paper Title"
-    description="Author Name, Journal Name, vol. X, pp. Y-Z, Year."
-    date="2022-2023"
-    place="Another Place"
-  />
+<PageLayout title="Faculty of Department of Electronics and Communication Engineering | GEC PKD">
+    <ButtonLayout currentTab="publications" />
+    
+    {publications.map((pub) => (
+        <JournalPaper
+            title={pub.title}
+            description={`${pub.authors.join(', ')}, ${pub.journal}, ${pub.academic_year}`}
+            date={pub.date}
+            place={pub.institution}
+        />
+    ))}
 </PageLayout>
