@@ -1,12 +1,684 @@
 ---
 import "@/styles/global.css";
 import PageLayout from "@/layouts/page-layout.astro";
-import ProjectGallery from "@/components/project-gallery";
-import AchievementGallery from "@/components/achievement-gallery";
+import { Trophy, BookOpen, Award, Star } from "lucide-react";
+
+// Achievement data structure without year categorization
+const achievementData = {
+  studentAchievements: [
+    {
+      title: "S8 Toppers 2024",
+      description: "Academic excellence in final semester",
+      date: "2024",
+      image: "../src/assets/achievments/'24 s8 toppers.png",
+      icon: "trophy"
+    },
+    {
+      title: "S7 Achievements",
+      description: "Outstanding performance in seventh semester",
+      date: "2024",
+      image: "../src/assets/achievments/'24 s7.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "S7 Achievements",
+      description: "Exceptional academic performance",
+      date: "2025",
+      image: "../src/assets/achievments/'25 s7.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "S2 Achievements",
+      description: "Remarkable achievements in second semester",
+      date: "2027",
+      image: "../src/assets/achievments/'27 s2.png",
+      icon: "trophy"
+    },
+    {
+      title: "S1 Achievements",
+      description: "First semester accomplishments",
+      date: "2027",
+      image: "../src/assets/achievments/'27 s1.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "S6 Toppers",
+      description: "Top performers in sixth semester",
+      date: "2025",
+      image: "../src/assets/achievments/'25 s6 toppers.png",
+      icon: "trophy"
+    },
+    {
+      title: "S3 Achievements",
+      description: "Third semester highlights",
+      date: "2026",
+      image: "../src/assets/achievments/'26 s3.jpg",
+      icon: "trophy"
+    },
+    // Adding new images to student achievements
+    {
+      title: "NPTEL Certification",
+      description: "NPTEL certification achievements",
+      date: "2023",
+      image: "../src/assets/achievments/nptel 3.jpg",
+      icon: "award"
+    },
+    {
+      title: "NPTEL Success",
+      description: "Students excelling in NPTEL courses",
+      date: "2023",
+      image: "../src/assets/achievments/nptel.jpg",
+      icon: "award"
+    },
+    {
+      title: "Idea Hackathon",
+      description: "Second prize in Idea Hackathon competition",
+      date: "2023",
+      image: "../src/assets/achievments/second prize ideahackathon.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Volleyball Inter Zone",
+      description: "Inter-zone volleyball tournament participation",
+      date: "2023",
+      image: "../src/assets/achievments/volley ball inter zone.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Volleyball S3",
+      description: "S3 students in volleyball tournament",
+      date: "2023",
+      image: "../src/assets/achievments/volley ball s3.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Youth Parliament",
+      description: "Second place in Youth Parliament competition",
+      date: "2023",
+      image: "../src/assets/achievments/youth parliment 2nd.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "S5 Achievements",
+      description: "Fifth semester accomplishments",
+      date: "2025",
+      image: "../src/assets/achievments/'25 s5.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "S4 Achievements",
+      description: "Fourth semester performance highlights",
+      date: "2026",
+      image: "../src/assets/achievments/'26 s4.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "2022-2024 Toppers",
+      description: "Top performing students from 2022-2024 batch",
+      date: "2024",
+      image: "../src/assets/achievments/2022-2024 toppers.jpg",
+      icon: "award"
+    },
+    {
+      title: "S8 Batch 2024",
+      description: "Final semester students of 2024 batch",
+      date: "2024",
+      image: "../src/assets/achievments/2024 s8.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Batch Toppers 2024",
+      description: "Academic excellence in 2024 graduating batch",
+      date: "2024",
+      image: "../src/assets/achievments/batch topers 2024.png",
+      icon: "award"
+    },
+    {
+      title: "GATE 2024 Success",
+      description: "Students qualifying GATE examination",
+      date: "2024",
+      image: "../src/assets/achievments/gate 2024.jpg",
+      icon: "award"
+    },
+    {
+      title: "Handball University Selection",
+      description: "Students selected for university handball team",
+      date: "2023",
+      image: "../src/assets/achievments/hand ball uni selection.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Kho Kho Inter Zone",
+      description: "Inter-zone Kho Kho tournament selection",
+      date: "2023",
+      image: "../src/assets/achievments/kho kho inter zone selected.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "Kho Kho University Selection",
+      description: "Students selected for university Kho Kho team",
+      date: "2023",
+      image: "../src/assets/achievments/kho kho uni selection.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "LTU Karate Championship",
+      description: "Participation in LTU Karate championship",
+      date: "2023",
+      image: "../src/assets/achievments/ltu karate.jpg",
+      icon: "trophy"
+    },
+    {
+      title: "NPTEL Certification",
+      description: "NPTEL certification achievements - Level 2",
+      date: "2023",
+      image: "../src/assets/achievments/nptel 2.jpg",
+      icon: "award"
+    },
+    {
+      title: "Research Paper Presentation",
+      description: "Selected to present research at International Conference",
+      date: "September 2023",
+      icon: "book"
+    },
+    {
+      title: "Hackathon Champions",
+      description: "Won top prize in state-level technology hackathon",
+      date: "June 2022",
+      icon: "trophy"
+    },
+    {
+      title: "International Robotics Competition",
+      description: "Secured second place in international robotics challenge",
+      date: "December 2022",
+      image: "https://via.placeholder.com/400x300?text=Student+Achievement",
+      icon: "star"
+    },
+    // Text-based achievements without images
+    {
+      title: "NPTEL Elite Certificates",
+      description: "Sangeetha C N and K S Syamkrishna awarded Elite Silver certificate for 'Internet of Things'",
+      date: "2021-2025 batch",
+      icon: "award"
+    },
+    {
+      title: "NPTEL Gold & Silver",
+      description: "Adithya Mohan S awarded Elite Golden Certificate and Surya awarded Elite Silver Certificate for 'Introduction to IoT'",
+      date: "2022-26 batch",
+      icon: "award"
+    },
+    {
+      title: "YIP 4.0 State Winners",
+      description: "Sourav K C and Chithira M were State Level Winners of Young Innovators Programme 4.0 with the theme Fisheries",
+      date: "2019-23 batch",
+      icon: "trophy"
+    },
+    {
+      title: "Placement Achievement",
+      description: "59% of students placed with an average pay package of 2.7 lakh per annum",
+      date: "2019-23 batch",
+      icon: "award"
+    },
+    {
+      title: "District Ideathon Runner-up",
+      description: "Naveen Menon, Hridya T V, Sruthi and Adwaith Pushparajan achieved 2nd position out of 112 teams in District Level Ideathon",
+      date: "2020-24 batch",
+      icon: "trophy"
+    },
+    {
+      title: "Siemens Scholarship",
+      description: "Niranjan and Adwaith Pushparajan received Siemens Scholarship",
+      date: "2022-26/2020-24 batch",
+      icon: "award"
+    },
+    {
+      title: "Interzone Handball Champions",
+      description: "Aparna V Shenoy, Shifanath T S, and Neethu N won the Interzone Handball tournament-women's",
+      date: "2023-27/2020-24 batch",
+      icon: "trophy"
+    },
+    {
+      title: "KTU Interzone KHO-KHO Champions",
+      description: "Neethu N, G Ragendu, Azmi Nazar T & Anagha Suresh K V were winners of KTU Interzone KHO-KHO tournament-women's",
+      date: "2020-24 batch",
+      icon: "trophy"
+    },
+    {
+      title: "E-zone Handball Runner-ups",
+      description: "Roshan Raj, Athu Krishnan A P, and Ajmal J were runner-ups of Men's KTU E-zone Handball tournament",
+      date: "2021-25/2022-26 batch",
+      icon: "trophy"
+    },
+    {
+      title: "Sasneham Scholarship",
+      description: "Vishnu P U received Sasneham Scholarship from B.Tech ECE 2009-13 batch alumni",
+      date: "2022-26 batch",
+      icon: "award"
+    },
+    {
+      title: "E-zone Volleyball Runner-up",
+      description: "Athul Krishnan A P and Akshay Kumar were second runner-up of Men's KTU E-zone Volleyball tournament",
+      date: "2021-25/2022-26 batch",
+      icon: "trophy"
+    },
+    {
+      title: "Women's Karate Runner-up",
+      description: "Niranjana M was the runner-up of interzone women's Karate",
+      date: "2023-27 batch",
+      icon: "trophy"
+    },
+    {
+      title: "Multiple Placements",
+      description: "Ashwathy G R placed in 5 companies - Bosch, TCS, Capgemini, Cognizant and Travancore Analytics with B.Tech (Honours)",
+      date: "2018-22 batch",
+      icon: "star"
+    },
+    {
+      title: "R K Innovations",
+      description: "Initiative by Rohit K to design innovative products that address contemporary problems with constructive solutions",
+      date: "2019-23 batch",
+      icon: "star"
+    },
+    {
+      title: "University Handball Team",
+      description: "Shad Muhsin K is a member in APJKTU University Handball Team for two consecutive years",
+      date: "2021-22/2022-23",
+      icon: "trophy"
+    },
+    {
+      title: "SERB INAE Conclave",
+      description: "Rohith K, Jaison Joshi and Sourav participated in SERB INAE Conclave at IIT Kanpur",
+      date: "November 2022",
+      icon: "award"
+    },
+    {
+      title: "Siemens Scholarship",
+      description: "Amar Sonu is the recipient of Siemens Scholarship Programme for Engineering Students",
+      date: "2020-24 batch",
+      icon: "award"
+    },
+    {
+      title: "NPTEL Top 1% Achievement",
+      description: "Sangeetha C N awarded NPTEL Elite Silver Certificate for completing Introduction to Internet of Things in Top 1%",
+      date: "2021-25 batch",
+      icon: "award"
+    },
+    {
+      title: "NPTEL Top 5% Achievement",
+      description: "K S Syamkrishna awarded NPTEL Elite Silver Certificate for completing Introduction to Internet of Things in Top 5%",
+      date: "2021-25 batch",
+      icon: "award"
+    },
+    {
+      title: "Vingyan Mobile App",
+      description: "Mobile app developed for ECE students including study materials, textbooks, and GATE materials",
+      date: "2023",
+      icon: "book"
+    },
+    {
+      title: "Competitive Participation",
+      description: "Nearly 121 students participated in 48 different national and international events in three academic years",
+      date: "2020-2023",
+      icon: "trophy"
+    },
+    {
+      title: "GATE Success",
+      description: "Athira P B secured All India rank 129 in GATE-2022",
+      date: "2016-20 batch",
+      icon: "award"
+    },
+    {
+      title: "GATE Achievement",
+      description: "Sruthi Ramachandran secured All India rank 924 in GATE-2022",
+      date: "2017-21 batch",
+      icon: "award"
+    },
+    {
+      title: "Youth Parliament Winner",
+      description: "Anjana B secured National Youth Parliament 2021 District level winner, state level participant, and selected for Navakeralam Yuvakeralam",
+      date: "2017-21 batch",
+      icon: "trophy"
+    }
+  ],
+  facultyAchievements: [
+    {
+      title: "Badminton & Athletics Champion",
+      description: "Prof. Shamla B was first runner-up in Badminton-women's doubles in State Level Civil Service Meet, first place in Javelin throw and second in Chess at District Level",
+      date: "2023",
+      icon: "trophy"
+    },
+    {
+      title: "SWAYAM-NPTEL Recognition",
+      description: "Prof. Gayathri A awarded as Active SPOC for SWAYAM-NPTEL local chapter",
+      date: "2023",
+      icon: "award"
+    },
+    {
+      title: "Track & Field Champion",
+      description: "Mr. Mahesh C won 100m and 200m track events in District Level Civil Service Meet, placed in National Veterans Meet, Pacific Meet, and South India Masters Meet",
+      date: "2023",
+      icon: "trophy"
+    },
+    {
+      title: "Australian Patent",
+      description: "Dr. Anitha R awarded Australian patent for 'Inertial Measurement Unit for Wearable Continuous Human Motion Information System' (Patent No. 2020102947)",
+      date: "January 13, 2021",
+      icon: "award"
+    },
+    {
+      title: "PhD in Biomedical Signal Processing",
+      description: "Dr. Swapna G was awarded PhD under Faculty of Engineering, Amrita Vishwa Vidyapeetham Coimbatore",
+      date: "September 2022",
+      icon: "book"
+    },
+    {
+      title: "PhD in Electronics & Communication",
+      description: "Smt. Bindu P (Palakkal), HoD ECE received PhD from CUSAT",
+      date: "2019",
+      icon: "book"
+    },
+    {
+      title: "US Patent",
+      description: "Dr. AR Jayan secured a US Patent based on his PhD work at IIT Bombay, jointly with his Research Guide Dr. P.C. Pandey",
+      date: "2021",
+      icon: "award"
+    },
+    {
+      title: "PhD in Image Retrieval",
+      description: "Prof. R. Jayadevan awarded PhD from University of Calicut for his thesis 'A generic image retrieval technique for capturing multiple semantics'",
+      date: "December 9, 2021",
+      icon: "book"
+    },
+    {
+      title: "Best Paper Award - IEEE Conference",
+      description: "Sri Anoop CS won Best Paper Award at IEEE Conference ICICICT 2019 for his paper 'Automatic Speech Recognition for Sanskrit'",
+      date: "2019",
+      icon: "award"
+    },
+    {
+      title: "MTech Second Rank",
+      description: "Smt. Nirmala KV secured Second Rank in MTech (Signal Processing) Exam, MG University",
+      date: "November 2016",
+      icon: "award"
+    },
+    {
+      title: "Best Research Paper Award",
+      description: "Received at National Conference on Communication Technologies",
+      date: "November 2023",
+      icon: "award"
+    },
+    {
+      title: "Innovation Grant Received",
+      description: "Secured major research funding from national agency",
+      date: "September 2023",
+      image: "https://via.placeholder.com/400x300?text=Faculty+Achievement",
+      icon: "star"
+    },
+    {
+      title: "Research Grant Milestone",
+      description: "Completed significant research project with national recognition",
+      date: "June 2022",
+      icon: "award"
+    },
+    {
+      title: "Distinguished Researcher Award",
+      description: "Recognized for outstanding contributions to the field",
+      date: "December 2022",
+      image: "https://via.placeholder.com/400x300?text=Faculty+Achievement",
+      icon: "book"
+    }
+  ],
+  alumniAchievements: [
+    {
+      title: "Sastra Robotics",
+      description: "Sastra Robotics, a startup by our 2012 ECE alumnus Mr. Aronin Ponnappan signed a big contract with Aircraft Manufacturer Ms. Lockhead Martin for supplying robots for them.",
+      date: "October 2023",
+      image: "../src/assets/achievments/ach. alumini/mrAronin.png",
+      icon: "trophy"
+    },
+    {
+      title: "Startup Success Story",
+      description: "Sastra Robotics, One among the best 10 start-ups in Kerala",
+      date: "August 2023",
+      image: "../src/assets/achievments/ach. alumini/Sastra Robotics.jpg",
+      icon: "star"
+    }
+  ]
+};
+
+// Client-side state for category selection
+const initialCategory = 'student';
 ---
 
 <PageLayout title="Faculty of Department of Electronics and Communication Engineering | GEC PKD">
-    <div class="container mx-auto px-4 py-8">
-        <AchievementGallery client:load />
+  <div class="container mx-auto px-4 py-8">
+    <div class="space-y-6">
+      <div class="flex justify-start items-center mb-6">
+        <!-- Category Selector -->
+        <div class="flex items-center space-x-2 flex-wrap" id="category-buttons">
+          <button
+            id="student-btn"
+            class="px-4 py-2 rounded-md transition-all bg-blue-600 text-white mb-2 md:mb-0"
+          >
+            Student Achievements
+          </button>
+          <button
+            id="faculty-btn"
+            class="px-4 py-2 rounded-md transition-all bg-gray-200 text-gray-700 hover:bg-gray-300 mb-2 md:mb-0"
+          >
+            Faculty Achievements
+          </button>
+          <button
+            id="alumni-btn"
+            class="px-4 py-2 rounded-md transition-all bg-gray-200 text-gray-700 hover:bg-gray-300 mb-2 md:mb-0"
+          >
+            Alumni Achievements
+          </button>
+        </div>
+      </div>
+
+      <!-- Achievements Display -->
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-gray-700" id="category-title">
+          Student Achievements
+        </h3>
+        
+        <!-- Student Achievements Section -->
+        <div id="student-section" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {achievementData.studentAchievements.map((achievement, index) => (
+            <div 
+              key={index} 
+              class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+            >
+              {/* Conditional rendering for image or icon */}
+              {achievement.image ? (
+                <img
+                  src={achievement.image}
+                  alt={achievement.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                  onerror="this.src='https://via.placeholder.com/400x300?text=Achievement+Image'"
+                />
+              ) : (
+                <div class="w-full h-48 bg-blue-50 flex items-center justify-center">
+                  {achievement.icon === 'trophy' && <Trophy size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'book' && <BookOpen size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'award' && <Award size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'star' && <Star size={48} class="text-blue-600 mb-4" />}
+                </div>
+              )}
+              
+              <div class="p-4">
+                <h3 class="font-semibold text-blue-800 text-lg mb-2">
+                  {achievement.title}
+                </h3>
+                <p class="text-gray-600 mb-2">
+                  {achievement.description}
+                </p>
+                <span class="text-sm text-gray-500 font-medium">
+                  {achievement.date}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Faculty Achievements Section (Initially Hidden) -->
+        <div id="faculty-section" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+          {achievementData.facultyAchievements.map((achievement, index) => (
+            <div 
+              key={index} 
+              class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+            >
+              {/* Conditional rendering for image or icon */}
+              {achievement.image ? (
+                <img
+                  src={achievement.image}
+                  alt={achievement.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                  onerror="this.src='https://via.placeholder.com/400x300?text=Achievement+Image'"
+                />
+              ) : (
+                <div class="w-full h-48 bg-blue-50 flex items-center justify-center">
+                  {achievement.icon === 'trophy' && <Trophy size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'book' && <BookOpen size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'award' && <Award size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'star' && <Star size={48} class="text-blue-600 mb-4" />}
+                </div>
+              )}
+              
+              <div class="p-4">
+                <h3 class="font-semibold text-blue-800 text-lg mb-2">
+                  {achievement.title}
+                </h3>
+                <p class="text-gray-600 mb-2">
+                  {achievement.description}
+                </p>
+                <span class="text-sm text-gray-500 font-medium">
+                  {achievement.date}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Alumni Achievements Section (Initially Hidden) -->
+        <div id="alumni-section" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+          {achievementData.alumniAchievements.map((achievement, index) => (
+            <div 
+              key={index} 
+              class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+            >
+              {/* Conditional rendering for image or icon */}
+              {achievement.image ? (
+                <img
+                  src={achievement.image}
+                  alt={achievement.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                  onerror="this.src='https://via.placeholder.com/400x300?text=Achievement+Image'"
+                />
+              ) : (
+                <div class="w-full h-48 bg-blue-50 flex items-center justify-center">
+                  {achievement.icon === 'trophy' && <Trophy size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'book' && <BookOpen size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'award' && <Award size={48} class="text-blue-600 mb-4" />}
+                  {achievement.icon === 'star' && <Star size={48} class="text-blue-600 mb-4" />}
+                </div>
+              )}
+              
+              <div class="p-4">
+                <h3 class="font-semibold text-blue-800 text-lg mb-2">
+                  {achievement.title}
+                </h3>
+                <p class="text-gray-600 mb-2">
+                  {achievement.description}
+                </p>
+                <span class="text-sm text-gray-500 font-medium">
+                  {achievement.date}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
+  </div>
 </PageLayout>
+
+<script>
+  // Simple client-side JavaScript for toggling between categories
+  const studentBtn = document.getElementById('student-btn');
+  const facultyBtn = document.getElementById('faculty-btn');
+  const alumniBtn = document.getElementById('alumni-btn');
+  const categoryTitle = document.getElementById('category-title');
+  const studentSection = document.getElementById('student-section');
+  const facultySection = document.getElementById('faculty-section');
+  const alumniSection = document.getElementById('alumni-section');
+
+  if (studentBtn && facultyBtn && alumniBtn && categoryTitle && studentSection && facultySection && alumniSection) {
+    // Function to reset all buttons to default style
+    const resetButtons = () => {
+      [studentBtn, facultyBtn, alumniBtn].forEach(btn => {
+        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+        btn.classList.remove('bg-blue-600', 'text-white');
+      });
+    };
+
+    // Function to hide all sections
+    const hideSections = () => {
+      [studentSection, facultySection, alumniSection].forEach(section => {
+        section.classList.add('hidden');
+      });
+    };
+
+    studentBtn.addEventListener('click', () => {
+      // Reset all buttons and hide all sections
+      resetButtons();
+      hideSections();
+      
+      // Set active button
+      studentBtn.classList.add('bg-blue-600', 'text-white');
+      studentBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+      
+      // Show active section
+      studentSection.classList.remove('hidden');
+      
+      // Update title
+      categoryTitle.textContent = 'Student Achievements';
+    });
+
+    facultyBtn.addEventListener('click', () => {
+      // Reset all buttons and hide all sections
+      resetButtons();
+      hideSections();
+      
+      // Set active button
+      facultyBtn.classList.add('bg-blue-600', 'text-white');
+      facultyBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+      
+      // Show active section
+      facultySection.classList.remove('hidden');
+      
+      // Update title
+      categoryTitle.textContent = 'Faculty Achievements';
+    });
+
+    alumniBtn.addEventListener('click', () => {
+      // Reset all buttons and hide all sections
+      resetButtons();
+      hideSections();
+      
+      // Set active button
+      alumniBtn.classList.add('bg-blue-600', 'text-white');
+      alumniBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+      
+      // Show active section
+      alumniSection.classList.remove('hidden');
+      
+      // Update title
+      categoryTitle.textContent = 'Alumni Achievements';
+    });
+  }
+</script>
