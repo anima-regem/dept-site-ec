@@ -18,7 +18,7 @@ interface Props {
 const { events } = Astro.props as Props;
 ---
 
-<div class="w-full max-w-4xl mx-auto relative overflow-hidden">
+<div class="w-full max-w-5xl mx-auto relative overflow-hidden">
   <div class="absolute inset-x-0 w-16 h-full left-0 bg-gradient-to-r from-white/80 to-transparent dark:from-gray-900/80 z-40 pointer-events-none"></div>
   <div class="absolute inset-x-0 w-16 h-full right-0 bg-gradient-to-l from-white/80 to-transparent dark:from-gray-900/80 z-40 pointer-events-none"></div>
   
@@ -30,9 +30,9 @@ const { events } = Astro.props as Props;
         class:list={[
           "absolute transition-all duration-300 ease-in-out rounded-lg shadow-lg",
           {
-            "z-30 w-[80%] bottom-0": idx === 0,
-            "z-20 w-[75%] bottom-6 opacity-85 blur-[1px]": idx === 1,
-            "z-10 w-[70%] bottom-12 opacity-70 blur-[2px]": idx === 2,
+            "z-30 w-[85%] bottom-0": idx === 0,
+            "z-20 w-[80%] bottom-6 opacity-85 blur-[1px]": idx === 1,
+            "z-10 w-[75%] bottom-12 opacity-70 blur-[2px]": idx === 2,
             "hidden": idx > 2
           }
         ]}
@@ -165,11 +165,11 @@ const { events } = Astro.props as Props;
         if (position < 3) {
           event.classList.remove('hidden');
           if (position === 0) {
-            event.className = `${baseClasses} bottom-0 z-30 w-[80%] left-[10%]`;
+            event.className = `${baseClasses} bottom-0 z-30 w-[85%] left-[7.5%]`;
           } else if (position === 1) {
-            event.className = `${baseClasses} bottom-6 z-20 w-[75%] left-[12.5%] opacity-85`;
+            event.className = `${baseClasses} bottom-6 z-20 w-[80%] left-[10%] opacity-85`;
           } else {
-            event.className = `${baseClasses} bottom-12 z-10 w-[70%] left-[15%] opacity-70`;
+            event.className = `${baseClasses} bottom-12 z-10 w-[75%] left-[12.5%] opacity-70`;
           }
         } else {
           event.classList.add('hidden');
