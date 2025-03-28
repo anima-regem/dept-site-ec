@@ -18,40 +18,55 @@ interface Props {
 const { events } = Astro.props as Props;
 ---
 
-<div class="w-full max-w-4xl mx-auto">
-  <div class="relative h-96" id="carousel-container">
-    {events.slice(0, 3).map((event, idx) => (
+<div class="w-full max-w-4xl mx-auto relative overflow-hidden">
+  <div class="absolute inset-x-0 w-16 h-full left-0 bg-gradient-to-r from-white/80 to-transparent dark:from-gray-900/80 z-40 pointer-events-none"></div>
+  <div class="absolute inset-x-0 w-16 h-full right-0 bg-gradient-to-l from-white/80 to-transparent dark:from-gray-900/80 z-40 pointer-events-none"></div>
+  
+  <div class="relative h-auto py-8 flex justify-center" id="carousel-container">
+    {events.slice(0, events.length).map((event, idx) => (
       <div
         data-carousel-item
         data-event-id={event.id}
         class:list={[
-          "absolute left-0 right-0 transition-all duration-300 ease-in-out",
+          "absolute transition-all duration-300 ease-in-out rounded-lg shadow-lg",
           {
-            "bottom-0 z-30 h-full w-full": idx === 0,
-            "bottom-6 z-20 h-[90%] w-[95%] left-[2.5%] opacity-90": idx === 1,
-            "bottom-12 z-10 h-[80%] w-[90%] left-[5%] opacity-80": idx === 2
+            "z-30 w-[80%] bottom-0": idx === 0,
+            "z-20 w-[75%] bottom-6 opacity-85 blur-[1px]": idx === 1,
+            "z-10 w-[70%] bottom-12 opacity-70 blur-[2px]": idx === 2,
+            "hidden": idx > 2
           }
         ]}
       >
-        <Card className="w-full h-full overflow-hidden">
-          <div class="relative h-full">
+        <Card className="w-full overflow-hidden">
+          <div class="relative">
             {event.image && (
-              <div class="absolute inset-0">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  class="w-full h-full object-cover"
-                />
-              </div>
+              <>
+                {/* Background version (blurred/covered) */}
+                <div class="absolute inset-0 overflow-hidden rounded-t-lg">
+                  <img
+                    src={event.image}
+                    alt=""
+                    class="w-full h-full object-cover opacity-40"
+                  />
+                </div>
+                {/* Main image (contained/preserved) */}
+                <div class="w-full flex justify-center items-start pt-4 relative z-10">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    class="mx-auto object-contain max-h-[320px] max-w-[95%] rounded-lg shadow-md"
+                  />
+                </div>
+              </>
             )}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <CardContent className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <div class="bg-gradient-to-t from-black/70 via-transparent to-black/30 absolute inset-0 z-5" />
+            <CardContent className="relative p-6 text-white z-20 mt-4 bg-black/40 backdrop-blur-sm rounded-b-lg">
               <h3 class="text-2xl font-bold mb-2">{event.title}</h3>
               {event.date && (
                 <div class="text-sm text-gray-200 mb-2">{event.date}</div>
               )}
               {event.description && (
-                <p class="text-sm text-gray-200">{event.description}</p>
+                <p class="text-sm text-gray-300">{event.description}</p>
               )}
             </CardContent>
           </div>
@@ -87,6 +102,7 @@ const { events } = Astro.props as Props;
     private currentIndex: number;
     private events: Element[];
     private container: HTMLElement;
+    private autoplayInterval: number | null = null;
     
     constructor(container: HTMLElement) {
       this.currentIndex = 0;
@@ -97,16 +113,37 @@ const { events } = Astro.props as Props;
       const prevButton = document.querySelector('#prev-slide');
       const nextButton = document.querySelector('#next-slide');
       
-      prevButton?.addEventListener('click', () => this.prevSlide());
-      nextButton?.addEventListener('click', () => this.nextSlide());
+      prevButton?.addEventListener('click', () => {
+        this.prevSlide();
+        this.stopAutoplay(); // Stop autoplay on manual navigation
+      });
+      
+      nextButton?.addEventListener('click', () => {
+        this.nextSlide();
+        this.stopAutoplay(); // Stop autoplay on manual navigation
+      });
       
       // Add keyboard navigation
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowUp') this.prevSlide();
-        if (e.key === 'ArrowDown') this.nextSlide();
+        if (e.key === 'ArrowUp') {
+          this.prevSlide();
+          this.stopAutoplay();
+        }
+        if (e.key === 'ArrowDown') {
+          this.nextSlide();
+          this.stopAutoplay();
+        }
       });
       
+      // Handle resizing to adjust container height
+      window.addEventListener('resize', () => this.adjustContainerHeight());
+      
+      // Start with correct layout
       this.updateVisibleEvents();
+      this.adjustContainerHeight();
+      
+      // Optional: Start autoplay
+      this.startAutoplay(5000); // Change slides every 5 seconds
     }
     
     private nextSlide(): void {
@@ -120,7 +157,7 @@ const { events } = Astro.props as Props;
     }
     
     private updateVisibleEvents(): void {
-      const baseClasses = "absolute left-0 right-0 transition-all duration-300 ease-in-out";
+      const baseClasses = "absolute transition-all duration-300 ease-in-out rounded-lg shadow-lg";
       
       this.events.forEach((event, i) => {
         const position = (i - this.currentIndex + this.events.length) % this.events.length;
@@ -128,16 +165,45 @@ const { events } = Astro.props as Props;
         if (position < 3) {
           event.classList.remove('hidden');
           if (position === 0) {
-            event.className = `${baseClasses} bottom-0 z-30 h-full w-full`;
+            event.className = `${baseClasses} bottom-0 z-30 w-[80%] left-[10%]`;
           } else if (position === 1) {
-            event.className = `${baseClasses} bottom-6 z-20 h-[90%] w-[95%] left-[2.5%] opacity-90`;
+            event.className = `${baseClasses} bottom-6 z-20 w-[75%] left-[12.5%] opacity-85`;
           } else {
-            event.className = `${baseClasses} bottom-12 z-10 h-[80%] w-[90%] left-[5%] opacity-80`;
+            event.className = `${baseClasses} bottom-12 z-10 w-[70%] left-[15%] opacity-70`;
           }
         } else {
           event.classList.add('hidden');
         }
       });
+      
+      // Adjust container height after updating visible events
+      this.adjustContainerHeight();
+    }
+    
+    private adjustContainerHeight(): void {
+      // Get the current active slide
+      const activeSlide = this.events[this.currentIndex] as HTMLElement;
+      if (activeSlide) {
+        // Get the height of the active slide
+        const activeSlideHeight = activeSlide.offsetHeight;
+        
+        // Set container height to accommodate the active slide plus padding for stacked effect
+        this.container.style.height = `${activeSlideHeight + 24}px`; // 24px extra for the stacked cards below
+      }
+    }
+    
+    private startAutoplay(interval: number): void {
+      this.stopAutoplay(); // Clear any existing interval
+      this.autoplayInterval = setInterval(() => {
+        this.nextSlide();
+      }, interval) as unknown as number;
+    }
+    
+    private stopAutoplay(): void {
+      if (this.autoplayInterval) {
+        clearInterval(this.autoplayInterval);
+        this.autoplayInterval = null;
+      }
     }
   }
 
@@ -146,6 +212,16 @@ const { events } = Astro.props as Props;
     const container = document.querySelector('#carousel-container');
     if (container) {
       new EventCarousel(container as HTMLElement);
+    }
+  });
+  
+  // Also handle images loading to adjust heights after images load
+  window.addEventListener('load', () => {
+    const container = document.querySelector('#carousel-container');
+    if (container) {
+      setTimeout(() => {
+        const carousel = new EventCarousel(container as HTMLElement);
+      }, 100); // Small delay to ensure all images are processed
     }
   });
 </script>
