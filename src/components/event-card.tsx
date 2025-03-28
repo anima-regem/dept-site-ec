@@ -175,6 +175,13 @@ const events = [
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem a nobis earum. Possimus corrupti nostrum maxime inventore id earum voluptatem quo culpa ducimus.",
     imageURL: "../src/assets/events/tarang football 5.jpg",
     date: new Date(2024, 10, 5) // November 5, 2024
+  },
+  {
+    id: 26,
+    title: "Idea Hackthon",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem a nobis earum. Possimus corrupti nostrum maxime inventore id earum voluptatem quo culpa ducimus.",
+    imageURL: "../src/assets/events/Ideahackathon/ideahackathon.jpg",
+    date: new Date(2024, 10, 5) // November 5, 2024
   }
 ];
 
